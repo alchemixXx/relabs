@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  api:
+    restart: always
+    build: ./api
+    ports:
+      - "5000:5000"
+    links:
+      - postgres:postgres
+
+  postgres:
+    restart: always
+    build: ./data
+    environment:
+      - DB_CONNECTION=pgsql
+      - DB_HOST=postgresql
+      - DB_PORT=5432
+      - DB_DATABASE=postgres
+      - DB_USERNAME=postgres
+    ports:
+      - "5431:5432"
